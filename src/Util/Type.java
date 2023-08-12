@@ -63,8 +63,14 @@ public class Type {
     public boolean equal(Type other) {
         if (this == other) return true;
 
-        if (isInt && other.isInt) return true;
-        if (isBool && other.isBool) return true;
+        if (isInt) {
+            if (other.isInt) return true;
+            else return false;
+        }
+        if (isBool) {
+            if (other.isBool) return true;
+            return false;
+        }
         if (isString && other.isString) return true;
         if (isVoid && other.isVoid) return true;
         if (isThis && other.isThis) return true;

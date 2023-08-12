@@ -107,7 +107,6 @@ public class SemanticCheck implements ASTVisitor {
     public void visit(varDefStmtNode it) {
         Type type = gScope.getTypeFromTypeNode(it.typeName, it.pos);
         for (varDefUnitNode unit: it.units) {
-            currentScope.defineVariable(unit.name, type, unit.pos);
             if (unit.init != null) {
                 unit.init.accept(this);
                 if (unit.init.type.isThis) {
@@ -118,6 +117,7 @@ public class SemanticCheck implements ASTVisitor {
                     throw new semanticError("Semantic error: initialization expression type not match", unit.init.pos);
                 }
             }
+            currentScope.defineVariable(unit.name, type, unit.pos);
         }
     }
 
